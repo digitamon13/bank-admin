@@ -65,6 +65,7 @@ const DashboardDrawer = ({ showmenuHandler }) => {
         window.location.href = "https://brooker-admin-nir4.onrender.com";  // 
         return 
     }
+    navigate(data.link)
     }
   }
 
