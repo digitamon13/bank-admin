@@ -37,11 +37,6 @@ let topMenu = [
     title: 'send email',
     link: '/send-email'
   },
-  {
-    icon: 'wallet',
-    title: 'brooker',
-    link: '/brooker'
-  }
   
  
   
@@ -56,16 +51,12 @@ const DashboardDrawer = ({ showmenuHandler }) => {
   let { color } = useSelector(state => state.userAuth)
 
   let navigateHandler = async (data) => {
-    if (data.link === 'signout') {
+    if (data === 'signout') {
       navigate('/')
       await dispatch(logout())
 
     } else {
-      if(data.title == 'brooker'){
-        window.location.href = "https://brooker-admin-nir4.onrender.com";  // 
-        return 
-    }
-    navigate(data.link)
+      navigate(data)
     }
   }
 
@@ -83,7 +74,7 @@ const DashboardDrawer = ({ showmenuHandler }) => {
 
 
       <ul className={styles.drawerMenuCon}>
-        {topMenu.map(data => <li className={styles.drawerMenu} onClick={() => navigateHandler(data)} key={data.link} style={{ color: color.blue }}><span className='material-icons' key={data.title} style={{ backgroundColor: color.fadeColor, color: color.normalText }} >{data.icon}</span>{data.title}</li>)}
+        {topMenu.map(data => <li className={styles.drawerMenu} onClick={() => navigateHandler(data.link)} key={data.link} style={{ color: color.blue }}><span className='material-icons' key={data.title} style={{ backgroundColor: color.fadeColor, color: color.normalText }} >{data.icon}</span>{data.title}</li>)}
 
       </ul>
 

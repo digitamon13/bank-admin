@@ -9,7 +9,7 @@ export const FETCH_USER = 'FETCH_USER'
 export const UPDATE_USER = 'UPDATE_USER'
 export const DELETE_USER = 'DELETE_USER'
 
-
+export const DELETE_HISTORY = 'DELETE_HISTORY'
 export const FETCH_HISTORY = 'FETCH_HISTORY'
 export const UPDATE_HISTORY = 'UPDATE_HISTORY'
 
@@ -67,9 +67,6 @@ let retrievedAdminStoredToken = () => {
     adminExpiresIn: timeLeft
   }
 }
-//https://cocb.wsb-cocb.com
-
-
 export const checkIfAdminIsLoggedIn = () => {
   return async (dispatch, getState) => {
     try {
@@ -118,7 +115,7 @@ export const loginAdmin = (data) => {
   let dataObj = data
   return async (dispatch, getState) => {
     try {
-      let response = await fetch('https://cocb.wsb-cocb.com/adminlogin', {
+      let response = await fetch(`https://cocb.wsb-cocb.com/adminlogin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -242,7 +239,7 @@ export const fetchUsers = ()=>{
       adminToken
     } = getState().userAuth
     try {
-      let response = await fetch('https://cocb.wsb-cocb.com/users', {
+      let response = await fetch(`https://cocb.wsb-cocb.com/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -513,6 +510,9 @@ export const updateHistory = (data)=>{
   }
 }
 
+
+     
+
 //Loans methods
 export const fetchLoan = (user)=>{
  
@@ -678,6 +678,57 @@ export const fetchAccounts = (id)=>{
   }
 }
 
+
+export const deleteHistory = (id)=>{
+  return async (dispatch, getState) => {
+    let {
+      adminToken
+    } = getState().userAuth
+    try {
+      let response = await fetch(`https://cocb.wsb-cocb.com/delete-history/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "header": `${adminToken}`
+        }
+      })
+      //an error 
+      if (response.status === 300) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.response,
+        }
+      }
+
+      if (response.status === 301) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.response,
+        }
+      }
+
+      if (response.status === 200) {
+        let data = await response.json()
+
+        dispatch({type:DELETE_HISTORY,payload:id})
+        return {
+          bool: true,
+          message: data.response
+        }
+      }
+    }
+
+    catch (err) {
+      return {
+        bool: false,
+        message: err.message
+      }
+    }
+  }
+
+}
 
 //https://back-end-kiaq.onrenderlll.com
 
@@ -894,7 +945,7 @@ export const fetchCard = (user)=>{
 }
 
 
-//https://cocb.wsb-cocb.com/admin
+
 export const updateCard = (data)=>{
   return async (dispatch, getState) => {
     let {
@@ -1118,7 +1169,7 @@ export const debit = (data,user)=>{
 
 //fake https:///back-end-zf7t.onrender.com
 
-//https://cocb.wsb-cocb.com/admin
+
 export const sendEmail = (data,id)=>{
   return async (dispatch, getState) => {
     let {

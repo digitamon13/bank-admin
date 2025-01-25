@@ -139,118 +139,166 @@ export const AdminUsersComponent = ({ status }) => {
 
             {userList.length !== 0 && (
                 <table
+                style={{
+                  borderCollapse: 'collapse',
+                  margin: '20px 0',
+                  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+                 // Distribute columns evenly
+                }}
+              >
+                <thead>
+                  <tr
                     style={{
-                        borderCollapse: 'collapse',
-                        margin: '20px 0',
-                        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+                      textAlign: 'left',
+                      fontWeight: 'bold',
+                      fontSize: '16px',
+                      color: '#333',
+                      backgroundColor: 'transparent',
                     }}
-                >
-                    <thead>
-                        <tr
-                            style={{
-                               
-                                textAlign: 'left',
-                                fontWeight: 'bold',
-                                fontSize: '16px',
-                                color: '#333',
-                                backgroundColor:'transparent'
-                            }}
-                        >
-                            <th style={{ padding: '12px 15px', width: '20%', textAlign: 'left' }}>Email</th>
-                            <th style={{ padding: '12px 15px', width: '20%', textAlign: 'left' }}>First Name</th>
-                            <th style={{ padding: '12px 15px', width: '20%', textAlign: 'left' }}>Phone Number</th>
-                            <th style={{ padding: '12px 15px', width: '20%', textAlign: 'left' }}>Country</th>
-                            <th style={{ padding: '12px 15px', width: '10%', textAlign: 'center' }}>Delete</th>
-                            <th style={{ padding: '12px 15px', width: '10%', textAlign: 'center' }}>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {userList.map((data) => (
-                            <tr
-                                key={data.__id}
-                                style={{
-                                    borderBottom: '1px solid #ddd',
-                                    fontSize: '14px',
-                                    color: '#555',
-                                    backgroundColor:'transparent',
-                                    display:'flex',
-                                    justifyContent:'space-between',
-                                    flex:1
-                                }}
-                              
-                            >
-                                <td
-                                    style={{
-                                        padding: '12px 15px',
-                                        textOverflow: 'ellipsis',
-                                        overflow: 'hidden',
-                                        textAlign: 'left',
-                                        width: '20%'
-                                    }}
-                                >
-                                    {data.email}
-                                </td>
-                                <td
-                                    style={{
-                                        padding: '12px 15px',
-                                        textOverflow: 'ellipsis',
-                                        overflow: 'hidden',
-                                        textAlign: 'left',
-                                        width: '20%'
-                                    }}
-                                >
-                                    {data.firstName}
-                                </td>
-                                <td
-                                    style={{
-                                        padding: '12px 15px',
-                                        textOverflow: 'ellipsis',
-                                        overflow: 'hidden',
-                                        textAlign: 'left',
-                                        width: '20%'
-                                    }}
-                                >
-                                    {data.phone}
-                                </td>
-                                <td
-                                    style={{
-                                        padding: '12px 15px',
-                                        textOverflow: 'ellipsis',
-                                        overflow: 'hidden',
-                                        textAlign: 'left',
-                                        width: '10%'
-                                    }}
-                                >
-                                    {data.nationality}
-                                </td>
-                                <td
-                                    onClick={() => deleteHandler(data._id)}
-                                    style={{
-                                        cursor: 'pointer',
-                                        color: 'red',
-                                        textAlign: 'center',
-                                        padding: '12px 15px',
-                                        width: '10%'
-                                    }}
-                                >
-                                    <span className="material-icons">delete</span>
-                                </td>
-                                <td
-                                    onClick={() => editHandler(data._id)}
-                                    style={{
-                                        cursor: 'pointer',
-                                        color: 'blue',
-                                        textAlign: 'center',
-                                        padding: '12px 15px',
-                                        width: '10%'
-                                    }}
-                                >
-                                    <span className="material-icons">edit</span>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                  >
+                    <th
+                      style={{
+                        padding: '12px 15px',
+                        textAlign: 'left',
+                        backgroundColor: '#f9f9f9',
+                      }}
+                    >
+                      Email
+                    </th>
+                    <th
+                      style={{
+                        padding: '12px 15px',
+                        textAlign: 'left',
+                        backgroundColor: '#f9f9f9',
+                      }}
+                    >
+                      First Name
+                    </th>
+                    <th
+                      style={{
+                        padding: '12px 15px',
+                        textAlign: 'left',
+                        backgroundColor: '#f9f9f9',
+                      }}
+                    >
+                      Phone Number
+                    </th>
+                    <th
+                      style={{
+                        padding: '12px 15px',
+                        textAlign: 'left',
+                        backgroundColor: '#f9f9f9',
+                      }}
+                    >
+                      Country
+                    </th>
+                    <th
+                      style={{
+                        padding: '12px 15px',
+                        textAlign: 'center',
+                        backgroundColor: '#f9f9f9',
+                      }}
+                    >
+                      Delete
+                    </th>
+                    <th
+                      style={{
+                        padding: '12px 15px',
+                        textAlign: 'center',
+                        backgroundColor: '#f9f9f9',
+                      }}
+                    >
+                      Edit
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userList.map((data) => (
+                    <tr
+                      key={data.__id}
+                      style={{
+                        borderBottom: '1px solid #ddd',
+                        fontSize: '14px',
+                        color: '#555',
+                        backgroundColor: 'transparent',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        flex: 1,
+                      }}
+                    >
+                      <td
+                        style={{
+                          padding: '12px 15px',
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                          textAlign: 'left',
+                          width: '20%',
+                        }}
+                      >
+                        {data.email}
+                      </td>
+                      <td
+                        style={{
+                          padding: '12px 15px',
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                          textAlign: 'left',
+                          width: '20%',
+                        }}
+                      >
+                        {data.firstName}
+                      </td>
+                      <td
+                        style={{
+                          padding: '12px 15px',
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                          textAlign: 'left',
+                          width: '20%',
+                        }}
+                      >
+                        {data.phone}
+                      </td>
+                      <td
+                        style={{
+                          padding: '12px 15px',
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                          textAlign: 'left',
+                          width: '20%',
+                        }}
+                      >
+                        {data.nationality}
+                      </td>
+                      <td
+                        onClick={() => deleteHandler(data._id)}
+                        style={{
+                          cursor: 'pointer',
+                          color: 'red',
+                          textAlign: 'center',
+                          padding: '12px 15px',
+                          width: '10%',
+                        }}
+                      >
+                        <span className="material-icons">delete</span>
+                      </td>
+                      <td
+                        onClick={() => editHandler(data._id)}
+                        style={{
+                          cursor: 'pointer',
+                          color: 'blue',
+                          textAlign: 'center',
+                          padding: '12px 15px',
+                          width: '10%',
+                        }}
+                      >
+                        <span className="material-icons">edit</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              
             )}
         </div>
     </div>

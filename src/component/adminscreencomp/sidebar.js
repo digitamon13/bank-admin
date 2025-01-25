@@ -12,13 +12,7 @@ const Sidebar = ({ status }) => {
 
 
     let navigateHandler = (data) => {
-        
-        if(data.title == 'brooker'){
-            window.location.href = "https://brooker-admin-nir4.onrender.com";  // 
-            return 
-        }
-        navigate(data.link)
-    
+        navigate(data)
     }
 
 
@@ -53,15 +47,11 @@ const Sidebar = ({ status }) => {
             title: 'send email',
             link: '/send-email'
           },
-          {
-            icon: 'wallet',
-            title: 'brooker',
-            link: '/brooker'
-          },
           
          
     ]
-   
+
+
 
 
 
@@ -75,7 +65,7 @@ const Sidebar = ({ status }) => {
 
         <div className={styles.middleSection}>
             <ul>
-                {linkData.map(data => <li onClick={() => navigateHandler(data)}
+                {linkData.map(data => <li onClick={() => navigateHandler(data.link)}
                     key={data.title} style={{ backgroundColor: status === `${data.title}` ? menuBackgroundColor : '' }}><span className='material-icons' style={{ color: status === `${data.title}` ? menutextColor : '' }}>{data.icon}</span>
 
                     <p style={{ color: status === `${data.title}` ? menutextColor : color.normalText }} className={styles.listText}>{data.title}</p>

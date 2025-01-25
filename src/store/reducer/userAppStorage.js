@@ -1,6 +1,6 @@
 import {
     LOG_ADMIN_IN, LOGIN_ADMIN, FETCH_USERS, FETCH_USER, UPDATE_USER, DELETE_USER,
-    UPDATE_ADMIN, UPDATE_HISTORY, FETCH_HISTORY, FETCH_ACCOUNTS, DELETE_ACCOUNT, UPDATE_ACCOUNT, FETCH_LOAN, UPDATE_LOAN, FETCH_CARD, UPDATE_CARD
+    UPDATE_ADMIN, UPDATE_HISTORY, FETCH_HISTORY, FETCH_ACCOUNTS, DELETE_ACCOUNT, UPDATE_ACCOUNT, FETCH_LOAN, UPDATE_LOAN, FETCH_CARD, UPDATE_CARD, DELETE_HISTORY
 } from "../action/userAppStorage";
 
 const initialState = {
@@ -79,6 +79,15 @@ export const userAuthReducer = (state = initialState, action) => {
                 }
             }
 
+        case DELETE_HISTORY:
+            if (true) {
+                let historyId = action.payload
+                let newHistory = state.historyList.filter(data => data._id !== historyId)
+                return {
+                    ...state,
+                    historyList: newHistory 
+                }
+            }
         case FETCH_HISTORY:
             return {
                 ...state,
@@ -170,7 +179,7 @@ export const userAuthReducer = (state = initialState, action) => {
                 ...state,
                 cardList: action.payload
             }
-            
+
         case UPDATE_CARD:
             if (true) {
                 let updatedCard = action.payload
