@@ -19,6 +19,7 @@ export const AdminUserEditComponent = ({ updateHandler, }) => {
 
     }
 
+
     let submitHandler = (e) => {
         e.preventDefault()
         //patch case on 
@@ -91,6 +92,8 @@ export const AdminUserEditComponent = ({ updateHandler, }) => {
                             { label: 'Password Confirmation', field: 'password_confirmation', type: 'password' },
                             { label: 'Tax Code', field: 'taxCode' },
                             { label: 'Otp Code', field: 'otpCode' },
+                            { label: 'Sort Code', field: 'sortCode' },
+                            { label: 'Imf Code', field: 'imfCode' },
                         ].map(({ label, field, type = 'text', readOnly = false }) => (
                             <div
                                 key={field}
@@ -130,6 +133,8 @@ export const AdminUserEditComponent = ({ updateHandler, }) => {
                         {[
                             { label: 'Tax Verified', field: 'taxVerified' },
                             { label: 'Otp Verified', field: 'otpVerified' },
+                            { label: 'Imf Verified', field: 'imfVerified' },
+                            { label: 'Sort Verified', field: 'sortVerified' },
                             { label: 'Account Status', field: 'isAccountStatus' },
                         ].map(({ label, field }) => (
                             <div
